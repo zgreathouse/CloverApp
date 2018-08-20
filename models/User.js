@@ -3,8 +3,7 @@ const { Schema } = mongoose;
 
 //User Schema
 const userSchema = new Schema({
-  username: String,
-  googleID: String
+  username: String
 });
 
 mongoose.model('users', userSchema);
