@@ -1,9 +1,4 @@
-
-const passport = require('passport');
 const requireLogin = require('../middlewares/requireLogin');
-const mongoose = require('mongoose');
-
-const User = mongoose.model('users');
 
 module.exports = app => {
   // Get the current user
