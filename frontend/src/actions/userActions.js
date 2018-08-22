@@ -1,14 +1,21 @@
 import axios from 'axios';
 
 //action types
-export const FETCH_USER = 'FETCH_USER';
+export const REDIRECT_USER = 'REDIRECT_USER';
 
 //action which fetches the current user
-export const fetchUser = () => async dispatch => {
-  const res = await axios.get('/api/currentUser');
+export const redirectUser = () => async dispatch => {
+  let payload = true;
+  let res;
+
+  if (window.location.search === "") {
+    payload = false;
+    res = await axios.get("/api");
+    console.log(res.data);
+  }
 
   dispatch({
-    type: FETCH_USER,
-    payload: res.data
+    type: REDIRECT_USER,
+    payload
   });
 };

@@ -1,15 +1,16 @@
-const requireLogin = require('../middlewares/requireLogin');
+const keys = require('../config/keys');
 
 module.exports = app => {
-  // Get the current user
-  app.get('/api/currentUser', (req, res) => {
-    res.send(req.user);
+  app.get(`/api`, (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+    next();
+  }, (req, res, next) => {
+    console.log("made it!");
+    res.redirect(`${keys.MERCHANT_LOGIN_URL}`);
+    next();
+  }, (req, res) => {
+    res.send('nice');
   });
-
-  // Logout the current User
-  app.get('/api/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
-
-}
+};

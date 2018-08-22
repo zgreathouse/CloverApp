@@ -1,22 +1,23 @@
 const express = require('express');
-// const cooki eSession = require('cookie-session');
 const bodyParser = require('body-parser');
-
+// const cors = require('cors');
 const keys = require('./config/keys');
 
 const app = express();
 
 //middlewares
+// app.use(cors());
 app.use(bodyParser.json());
-// app.use(
-//   cookieSession({
-//     maxAge: 2592000000,
-//     keys: [keys.cookieKey]
-//   })
-// );
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  next();
+});
 
 //routes
-// require('./routes/authRoutes')(app);
+require('./routes/authRoutes')(app);
+require('./routes/inventoryRoutes')(app);
 
 //dynamic port binding
 const PORT = process.env.PORT || 5000;

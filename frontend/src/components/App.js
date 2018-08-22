@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //actions
-import { fetchUser } from '../actions/userActions';
+import { redirectUser } from '../actions/userActions';
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchUser();
+    this.props.redirectUser();
   }
 
   render() {
-    const { currentUser } = this.props;
-
     return (
-      <div >
-        <h1>Merchant Inventory!</h1>
+      <div style={{ maxWidth: "1200px", margin: "0 auto"}}>
+        <h2>Merchant Inventory!</h2>
+        {/* <a href="https://sandbox.dev.clover.com/oauth/authorize?client_id={clientID}&redirect_uri=http://localhost:3000">
+          Login
+        </a> */}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   currentUser: state.auth
 });
 
-export default connect(mapStateToProps, { fetchUser })(App);
+export default connect(mapStateToProps, { redirectUser })(App);
